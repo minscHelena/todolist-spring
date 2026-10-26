@@ -1,5 +1,17 @@
+package br.edu.ifpr.todolist;
+
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 @Configuration
-@EnableMethodSecurity
 public class SecurityConfig {
 
     @Bean 
@@ -33,21 +45,20 @@ public class SecurityConfig {
     securityFilterChain(HttpSecurity http) throws Exception
     {
         http.csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(
-                auth
-                -> auth.requestMatchers("/tarefas/cadastrar")
+            .authorizeHttpRequests( auth -> auth
+                .requestMatchers("/tarefas/cadastrar")
                        .authenticated()
                        .requestMatchers("/tarefas/listar")
                        .authenticated()
-                       .requestMatchers("/tarefas/buscarPorId")
+                       .requestMatchers("/tarefas/buscarPorId/{id}")
                        .authenticated()
-                       .requestMatchers("/tarefas/excluir")
+                       .requestMatchers("/tarefas/excluir/{id}")
                        .hasRole("ADMIN")
                        .anyRequest().denyAll())
             .formLogin(form
                        -> form.defaultSuccessUrl(
                            "/tarefas/listar", true))
-            .httpBasic();
+            .httpBasic(basic -> {});
 
         return http.build();
     }

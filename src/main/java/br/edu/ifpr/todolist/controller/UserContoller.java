@@ -1,4 +1,4 @@
-import org.springframework.web.bind.annotation.RequestMapping;
+/*import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -9,7 +9,7 @@ public class UserController {
     @GetMapping("/cadastrar")
     @PreAuthorize("hasRole('USER','ADMIN')") 
     public String cadastrarTarefa()
-    {   redirect 
+     
         return HttpStatus;
     }
 
@@ -34,4 +34,4 @@ public class UserController {
         return HttpStatus;
     }
  
-}
+}*/

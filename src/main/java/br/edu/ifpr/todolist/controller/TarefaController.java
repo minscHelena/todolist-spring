@@ -31,7 +31,7 @@ public class TarefaController {
 
 
     @PostMapping
-    @PreAuthorize("hasRole('USER','ADMIN')")
+    @GetMapping("/cadastrar")
     public Tarefa cadastrar(@RequestBody Tarefa tarefa){
         if(tarefa.getTitulo()== null || tarefa.getTitulo().isBlank()) {
             throw new RuntimeException("Título obrigatório");
@@ -41,20 +41,17 @@ public class TarefaController {
         return repository.save(tarefa);
     }
 
-    @GetMapping 
-    @PreAuthorize("hasRole('USER','ADMIN')")
+    @GetMapping("/listar") 
     public List<Tarefa> listar(){
         return repository.findAll();
     }
 
-    @GetMapping("/{id}")
-    @PreAuthorize("hasRole('USER','ADMIN')")
+    @GetMapping("buscarPorId/{id}")
     public Tarefa buscarPorId(@PathVariable Long id) {
         return buscarTarefa(id);
     }
     
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("excluir/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id){
         Tarefa tarefa = buscarTarefa(id);
         repository.delete(tarefa);
