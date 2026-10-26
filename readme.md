@@ -1,5 +1,3 @@
-# Segurança da aplicação
-
 ## Questões
 
 ### 1. Qual é a diferença entre autenticação e autorização? Exemplifique com o projeto.
